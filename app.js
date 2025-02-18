@@ -1,42 +1,61 @@
-let elemAmigo = document.getElementById("nome-amigo"); //input
-let elemListaAmigos = document.getElementById("lista-amigos"); // paragrafo
-let elemListaSorteio = document.getElementById("lista-sorteio"); // paragrafo
+let nome = "";
 
-let amigos = [];
-
-function adicionar() {
-  // Adiciona participante na lista de amigos desde que o campo não esteja em vazio ou já adicionado
-  const amigo = elemAmigo.value;
-  if (amigo && !amigos.includes(amigo.toUpperCase())) {
-    amigos.push(amigo.toUpperCase());
-    elemListaAmigos.textContent = amigos.join(", ");
-    elemAmigo.value = "";
-  }
-}
-function sortear() {
-  elemListaSorteio.innerHTML = "";
-
-  embaralhaArray(amigos);
-  for (i = 0; i < amigos.length; i++) {
-    if (i == amigos.length - 1) {
-      elemListaSorteio.innerHTML += `${amigos[i]} --> ${amigos[0]}<br>`;
+//criando função de salvar nome
+function salvarNome() {
+   nome = document.getElementById("nome").value;
+    if (nome == "") {
+        alert("Por favor, insira seu nome");
     } else {
-      elemListaSorteio.innerHTML += `${amigos[i]} --> ${amigos[i + 1]}<br>`;
+        listaDeAmigos.push(nome);
+        document.getElementById("nome").value = "";
+        atualizarLista();
     }
-  }
 }
 
-// FUNCAO PARA EMBARALHAR ARRAY
-function embaralhaArray(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-}
+// criando lista de amigos vazia
+let listaDeAmigos = [];
 
-function reiniciar() {
-  amigos.length = 0;
-  elemListaSorteio.innerHTML = "";
-  elemAmigo.value = "";
-  elemListaAmigos.textContent = "";
+//criando função de adicionar amigo na lista
+function adicionarAmigo() {
+    let nomeAmigo = document.getElementById("amigo").value;
+    if (nomeAmigo == "") {
+        alert("Por favor, insira um nome");
+    } else {
+        listaDeAmigos.push(nomeAmigo);
+        document.getElementById("amigo").value ="";
+        atualizarLista();
+    }
+}
+// funcão para atualizar a lista de amigos
+function atualizarLista() {
+    let listaAtualizada = document.getElementById("listaAmigos");
+    listaAtualizada.innerHTML = "";
+    for (let i = 0; i < listaDeAmigos.length; i++) {
+        let itemLista = document.createElement("li");
+        itemLista.innerHTML = listaDeAmigos[i];
+        listaAtualizada.appendChild(itemLista);
+    }
+}
+// funcão para sortear amigo e também impedir que a pessoa tire seu proprio nome
+function sortearAmigo() {
+    if (listaDeAmigos.length == 0) {
+        alert("Por favor, insira um nome.");
+        return;
+
+    }
+    let indiceAleatorio = Math.floor(Math.random() * listaDeAmigos.length);
+    let nomeSorteado = listaDeAmigos[indiceAleatorio];
+    if (nomeSorteado == nome) {
+        alert("Você não pode ser seu próprio amigo secreto! Por favor, tente novamente.");
+        return;
+    }
+
+    document.getElementById("resultado").innerHTML = `Seu amigo secreto é: ${nomeSorteado}`;
+
+}  
+
+function reiniciarSorteio() {
+    listaDeAmigos = [];
+    document.getElementById("resultado").innerHTML = "";
+    atualizarLista();
 }

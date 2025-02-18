@@ -1,90 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Inter&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="
-https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
-"
-      rel="stylesheet"
-    />
-    <link
-      href="
-https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css
-"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <title>Amigo Secreto</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+</head>
 
-  <body>
-    <main>
-      <img
-        class="page__image"
-        src="./assets/imagem-presente.png"
-        alt="Imagem de um presente"
-      />
-      <div class="content">
-        <div class="content__corner-rectangle"></div>
-        <div class="content__main">
-          <section>
-            <h1 class="section__title">Amigo <span>Secreto</span></h1>
-            <form class="form">
-              <label class="form__label"> Digite o nome de um amigo </label>
-              <input
-                id="nome-amigo"
-                class="form__input"
-                type="text"
-                placeholder="Nome do amigo"
-              />
-              <div class="form__buttons">
-                <button
-                  onclick="adicionar()"
-                  type="button"
-                  class="button primary"
-                >
-                  Adicionar
-                </button>
-                <button
-                  onclick="sortear()"
-                  type="button"
-                  class="button secondary"
-                >
-                  Sortear
-                </button>
-                <a onclick="reiniciar()" href="#" class="form__link"
-                  >Reiniciar</a
-                >
-              </div>
-            </form>
-          </section>
-          <section class="section--results">
-            <article>
-              <p class="friends__title">Amigos incluídos</p>
-              <div class="friends__container">
-                <p id="lista-amigos"></p>
-              </div>
-            </article>
-            <article>
-              <p class="prizeDraw__title">Sorteio</p>
-              <div class="prizeDraw__container">
-                <p id="lista-sorteio"></p>
-              </div>
-            </article>
-          </section>
+<body>
+    <main class="main-content">
+        <div class="buttons__nav__menu">
+            <button class="button__nav__menu__inicio" onclick="location.href='index.html'">Início</button>
         </div>
-      </div>
-    </main>
-    <div class="background__detail"></div>
+        <header class="header-banner">
+            <h1 class="main-title">Amigo Secreto</h1>
+            <img src="assets/Unknown.png" alt="Imagem representativa de amigo secreto">
+        </header>
 
-    <script src="js/app.js"></script>
-  </body>
+        <section class="input-section">
+            <h2 class ="section-title">Qual é o seu nome?</h2>
+            <div class="input-wrapper nome-pessoal">
+                <input type="text" id="nome" class="input-name" placeholder="Digite seu nome">
+                <button class="button-add" onclick="salvarNome()">Confirmar</button>
+            </div>
+
+            <h2 class="section-title">Adicione seus amigos</h2>
+            <div class="input-wrapper">
+                <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
+                <button class="button-add" onclick="adicionarAmigo()">Adicionar</button>
+            </div>
+           
+            <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+            <ul id="resultado" class="result-list" aria-live="polite"></ul>
+
+            <div class="button-container">
+                <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
+                    <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
+                    Sortear amigo
+                </button>
+                <button class="button-reiniciar" onclick="reiniciarSorteio()" aria-label="Reiniciar sorteio">
+                    <img src="assets/playback.png" alt="Ícone para reiniciar">
+                    Reiniciar sorteio
+            </div>
+        </section>
+        <footer class="rodape">
+            <p>&copy; 2025 Amigo Secreto Alura + ONE G8</p>
+        </footer>
+    </main>
+
+    <script src="app.js" defer></script>
+</body>
 </html>
